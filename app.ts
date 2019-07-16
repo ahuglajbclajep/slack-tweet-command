@@ -24,10 +24,10 @@ const app = new App({
 app.command("/tweet", async ({ command, ack, respond }) => {
   ack();
   try {
-    tweet(command.text);
+    await tweet(command.text);
   } catch {
     respond(error("Sorry, something went wrong."));
   }
 });
 
-(async () => await app.start(process.env.PORT))();
+app.start(process.env.PORT);
