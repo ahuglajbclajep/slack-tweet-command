@@ -1,6 +1,6 @@
 import Base64 from "crypto-js/enc-base64";
 import hmacSHA1 from "crypto-js/hmac-sha1";
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 import OAuth from "oauth-1.0a";
 
 type Config = {
@@ -43,6 +43,9 @@ export default class Tweet {
       .replace(/\+/g, "%20")
       .replace(/\*/g, "%2A");
 
-    return fetch(url, { method: "POST", headers, body });
+    return fetch(url, { method: "POST", headers, body }).then((response) => {
+      if (!response.ok) throw new Error();
+      return response.json();
+    });
   }
 }
