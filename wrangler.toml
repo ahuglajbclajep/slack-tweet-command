@@ -1,0 +1,8 @@
+name = "slack-tweet-command"
+type = "javascript"
+account_id = ""
+workers_dev = true
+
+[build]
+upload_format = "service-worker"
+command = "yarn && yarn build"
