@@ -12,10 +12,12 @@
   "dependencies": {
     "@slack/bolt": "^1.2.0",
     "crypto-js": "^4.0.0",
+    "node-fetch": "^2.6.1",
     "oauth-1.0a": "^2.2.6"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.0.1",
+    "@types/node-fetch": "^2.5.10",
     "typescript": "^3.5.3"
   }
 }

@@ -1,5 +1,6 @@
 import Base64 from "crypto-js/enc-base64";
 import hmacSHA1 from "crypto-js/hmac-sha1";
+import fetch from 'node-fetch';
 import OAuth from "oauth-1.0a";
 
 type Config = {
