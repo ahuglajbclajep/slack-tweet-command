@@ -1,13 +1,12 @@
 import { App } from "@slack/bolt";
-import Twit from "twit";
+import Tweet from "./tweet";
 
-const twit = new Twit({
+const tweet = new Tweet({
   consumer_key: process.env.TWITTER_API_KEY!,
   consumer_secret: process.env.TWITTER_API_SECRET!,
   access_token: process.env.TWITTER_ACCESS_TOKEN!,
   access_token_secret: process.env.TWITTER_ACCESS_SECRET!
 });
-const tweet = (text: string) => twit.post("statuses/update", { status: text });
 
 const error = (text: string) => ({
   response_type: "ephemeral" as const,
@@ -24,7 +23,7 @@ const app = new App({
 app.command("/tweet", async ({ command, ack, respond }) => {
   ack();
   try {
-    await tweet(command.text);
+    await tweet.post("statuses/update", { status: command.text });
   } catch {
     respond(error("Sorry, something went wrong."));
   }
