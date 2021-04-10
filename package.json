@@ -7,16 +7,13 @@
     "build": "webpack --node-env production"
   },
   "dependencies": {
-    "@slack/bolt": "^1.2.0",
     "crypto-js": "^4.0.0",
-    "node-fetch": "^2.6.1",
     "oauth-1.0a": "^2.2.6"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^2.2.1",
     "@cloudflare/wrangler": "^1.15.0-custom-builds-rc.2",
     "@types/crypto-js": "^4.0.1",
-    "@types/node-fetch": "^2.5.10",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.4",
     "webpack": "^5.31.2",
