@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // see https://github.com/cloudflare/workers-types/tree/v2.2.0#usage
     "target": "esnext",
     "module": "esnext",
     "lib": ["esnext", "webworker"],
