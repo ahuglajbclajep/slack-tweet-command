@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "dist",
+    // see https://github.com/cloudflare/workers-types/tree/v2.2.0#usage
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext", "webworker"],
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "types": ["@cloudflare/workers-types"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   }
 }
