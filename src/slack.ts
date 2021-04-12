@@ -9,6 +9,12 @@ async function verify(request: Request): Promise<boolean> {
   return `v0=${signature}` === request.headers.get("X-Slack-Signature");
 }
 
+// TODO: when verify() works, delete it
+async function deprecatedVerify(request: Request): Promise<boolean> {
+  const token = new URLSearchParams(await request.text()).get("token");
+  return token === SLACK_VERIFICATION_TOKEN;
+}
+
 function errorMessage(text: string): object {
   return {
     response_type: "ephemeral",
@@ -17,4 +23,4 @@ function errorMessage(text: string): object {
   };
 }
 
-export { verify, errorMessage };
+export { deprecatedVerify as verify, errorMessage };

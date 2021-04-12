@@ -1,4 +1,4 @@
-import { errorMessage } from "./slack";
+import { errorMessage, verify } from "./slack";
 import Twitter from "./twitter";
 
 addEventListener("fetch", (event) => {
@@ -6,7 +6,7 @@ addEventListener("fetch", (event) => {
 });
 
 async function handleRequest(request: Request) {
-  // if (!(await verify(request))) return new Response(null, { status: 403 });
+  if (!(await verify(request))) return new Response(null, { status: 403 });
 
   const params: Record<string, string> = [
     ...new URLSearchParams(await request.text()).entries(),
