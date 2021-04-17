@@ -9,7 +9,7 @@ type Config = {
   access_token_secret: string;
 };
 
-export default class Tweet {
+export default class Twitter {
   private client: OAuth;
   private token: OAuth.Token;
 

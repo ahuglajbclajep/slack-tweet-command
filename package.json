@@ -4,7 +4,9 @@
   "private": true,
   "main": "dist/main.js",
   "scripts": {
-    "build": "webpack --node-env production"
+    "prebuild": "rm -rf dist",
+    "build": "webpack --node-env production",
+    "deploy": "wrangler publish"
   },
   "dependencies": {
     "crypto-js": "^4.0.0",
@@ -12,11 +14,11 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^2.2.1",
-    "@cloudflare/wrangler": "^1.15.0-custom-builds-rc.2",
+    "@cloudflare/wrangler": "^1.16.0",
     "@types/crypto-js": "^4.0.1",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.4",
-    "webpack": "^5.31.2",
+    "webpack": "^5.33.2",
     "webpack-cli": "^4.6.0"
   }
 }

@@ -3,7 +3,6 @@ type = "javascript"
 account_id = ""
 workers_dev = true
 
-# see https://github.com/cloudflare/wrangler/releases/tag/v1.15.0-custom-builds-rc.2
 [build]
-upload_format = "service-worker"
-command = "yarn && yarn build"
+upload.format = "service-worker"
+command = "yarn build"
