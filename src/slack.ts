@@ -2,17 +2,11 @@ import Hex from "crypto-js/enc-hex";
 import hmacSHA256 from "crypto-js/hmac-sha256";
 
 // see https://api.slack.com/authentication/verifying-requests-from-slack
-async function verify(request: Request): Promise<boolean> {
-  const timestamp = request.headers.get("X-Slack-Request-Timestamp");
-  const baseString = `v0:${timestamp}:${await request.text()}`;
+function verify(headers: Headers, body: string): boolean {
+  const timestamp = headers.get("X-Slack-Request-Timestamp");
+  const baseString = `v0:${timestamp}:${body}`;
   const signature = Hex.stringify(hmacSHA256(baseString, SLACK_SIGNING_SECRET));
-  return `v0=${signature}` === request.headers.get("X-Slack-Signature");
-}
-
-// TODO: when verify() works, delete it
-async function deprecatedVerify(request: Request): Promise<boolean> {
-  const token = new URLSearchParams(await request.text()).get("token");
-  return token === SLACK_VERIFICATION_TOKEN;
+  return `v0=${signature}` === headers.get("X-Slack-Signature");
 }
 
 function errorMessage(text: string): object {
@@ -23,4 +17,4 @@ function errorMessage(text: string): object {
   };
 }
 
-export { deprecatedVerify as verify, errorMessage };
+export { verify, errorMessage };
