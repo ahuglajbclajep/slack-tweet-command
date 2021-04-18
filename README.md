@@ -1,6 +1,7 @@
 # slack-tweet-command
 
 Add the `/tweet` command to your Slack workspace.
+It runs on [Cloudflare Workers](https://workers.cloudflare.com), so there is **no cold starts**.
 
 ## Usage
 
@@ -11,6 +12,10 @@ Add the `/tweet` command to your Slack workspace.
 ## Install
 
 ### 1. Deploy to Cloudflare
+
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/ahuglajbclajep/slack-tweet-command)
+
+or
 
 ```sh
 $ git clone https://github.com/ahuglajbclajep/slack-tweet-command.git .
@@ -36,7 +41,7 @@ Go to the [your Slack apps page](https://api.slack.com/apps).
 1. Create New App
    - Development Slack Workspace: select a workspace you want to install this app
 2. Create New Slash Command
-   - Request URL: Your Heroku application's URL
+   - Request URL: your Worker's URL
 3. Note down Signing Secret
 
 ### 4. Set environment variables

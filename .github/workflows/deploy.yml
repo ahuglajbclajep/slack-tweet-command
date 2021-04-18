@@ -1,0 +1,17 @@
+# see https://developers.cloudflare.com/workers/platform/deploy-button
+name: deploy
+on: repository_dispatch
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: yarn --frozen-lockfile
+      - run: yarn deploy
+        # see https://developers.cloudflare.com/workers/cli-wrangler/authentication
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
