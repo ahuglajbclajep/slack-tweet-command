@@ -1,79 +1,53 @@
 # slack-tweet-command
 
-Add a `/tweet` command to your workspace.
+Add the `/tweet` command to your Slack workspace.
 
 ## Usage
 
 - `/tweet message`  
-  Tweet a message.
-  A message will be posted correctly even if they contain line breaks or URLs.
+  Tweet your message.
+  The message will be posted correctly even if it contains line breaks or URLs.
 
 ## Install
 
-### Apply for a twitter developer account
+### 1. Deploy to Cloudflare
 
-[User authentication](https://developer.twitter.com/en/docs/basics/authentication/overview/oauth) is required to tweet from third party clients.
-Apply for a developer account from [here](https://developer.twitter.com), and [create an application](https://developer.twitter.com/en/apps/create).
-_API key_, _API secret key_, _Access token_, _Access token secret_ can be obtained.
+```sh
+$ git clone https://github.com/ahuglajbclajep/slack-tweet-command.git .
+$ yarn
+$ npx wrangler login
+$ npx wrangler whoami
+# enter the Account ID in the account_id field of wrangler.toml
+$ yarn deploy
+```
 
-### Create a Heroku application
+### 2. Apply for a twitter developer account
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[Authentication](https://developer.twitter.com/en/docs/authentication/oauth-1-0a) is required to tweet from third party clients.
 
-### Create a Slack application
+1. Apply for a developer account from [here](https://developer.twitter.com/en/apply-for-access)
+2. [Create an app](https://developer.twitter.com/en/portal/apps/new)
+3. Note down API Key, API Secret, Access Token and Access Secret
 
-Go to the [your Slack Apps web page](https://api.slack.com/apps).
+### 3. Create a Slack app
 
-1. _Create New app_.
-2. Setup application.
+Go to the [your Slack apps page](https://api.slack.com/apps).
 
-- _App Name_: As you like.
-- _Development Slack Workspace_: Select a workspace you want to install this app.
+1. Create New App
+   - Development Slack Workspace: select a workspace you want to install this app
+2. Create New Slash Command
+   - Request URL: Your Heroku application's URL
+3. Note down Signing Secret
 
-3. _Create App_.
+### 4. Set environment variables
 
-### Create a Bot User
-
-[Create a Bot User](https://slack.dev/bolt/tutorial/getting-started#tokens-and-installing-apps) for _Bot User OAuth Access Token_.
-
-### Create a Slash Command
-
-In the new application page:
-
-1. Select _Slack Commands_ from _Features_ menu.
-2. _Create New Command_.
-3. Setup new command.
-
-- _Command_: /tweet
-- _Request URL_: Your Heroku application's URL.
-- _Short Description_: e.g. "Tweet a message".
-- _Usage Hint_: e.g. "message".
-
-4. _Save_.
-
-### Setup environment variables
-
-In the application page:
-
-1. Select _Basic Information_ from _Settings_ menu.
-2. Note down _Signing Secret_.
-3. Select _OAuth & Permissions_ from _Features_ menu.
-4. Note down _Bot User OAuth Access Token_.
-
-In the Twitter application's details page:
-
-5. Select _Keys and tokens_ tab.
-6. Note down _API key_, _API secret key_, _Access token_, _Access token secret_.
-
-In the Heroku application's settings page:
-
-7. Select _Reveal Config Vars_.
-8. Add _Signing Secret_ as _SLACK_SIGNING_SECRET_.
-9. Add _Bot User OAuth Access Token_ as _SLACK_BOT_TOKEN_.
-10. Add _API key_ as _TWITTER_API_KEY_.
-11. Add _API secret key_ as _TWITTER_API_SECRET_.
-12. Add _Access token_ as _TWITTER_ACCESS_TOKEN_.
-13. Add _Access token secret_ as _TWITTER_ACCESS_SECRET_.
+```sh
+$ npx wrangler secret put SLACK_SIGNING_SECRET    # enter the Slack Signing Secret
+$ npx wrangler secret put TWITTER_CONSUMER_KEY    # enter the Twitter API Key
+$ npx wrangler secret put TWITTER_CONSUMER_SECRET # enter the Twitter API Secret
+$ npx wrangler secret put TWITTER_ACCESS_TOKEN    # enter the Twitter Access Token
+$ npx wrangler secret put TWITTER_ACCESS_SECRET   # enter the Twitter Access Secret
+```
 
 ## License
 
